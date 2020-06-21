@@ -1,4 +1,5 @@
 @echo off
+REM @auther mchsiaoj
 REM set environment variable on windows: https://stackoverflow.com/questions/44597662/conda-command-is-not-recognized-on-windows-10?rq=1
 REM https://dev.to/hygull/setting-anaconda-path-on-windows-2dmn
 REM or key "PATH" in Anaconda Prompt
