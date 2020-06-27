@@ -97,14 +97,9 @@ class Application(tk.Frame):
         self.btn_copyPath_post["text"] = "Copy to Output (Post)"
         self.btn_copyPath_post["command"] = lambda: self.copyDirectoryToEntry(self.entry_postImg, self.entry_outputPath)
         self.btn_copyPath_post.grid(row=2,column=3,padx=padx,pady=pady)
-        
-        frame = tk.Frame(self)
-        frame.grid(row=4, column=1)
-        btn = tk.Button(frame, text='123')
-        btn.pack()
-        
-#        self.imgShowFrame_pre = ImgShowFrame(self.master, imgTitle='Pre Image')
-#        self.imgShowFrame_pre.grid(row=4,column=0)
+
+        self.imgShowFrame_pre = ImgShowFrame(self.master, imgTitle='Pre Image')
+        self.imgShowFrame_pre.grid(row=4,column=0)
 #        
 #        self.imgShowFrame_post = ImgShowFrame(self,imgTitle='Post Image')
 #        self.imgShowFrame_post.grid(row=4,column=1)

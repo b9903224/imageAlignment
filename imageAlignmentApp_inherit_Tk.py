@@ -35,9 +35,9 @@ class ImgShowFrame(tk.Frame):
         self.canvas_img.create_text(120,120,text='No Image',fill="darkblue",font="Times 20 italic bold")
         self.canvas_img.pack()
         
-class Application(tk.Frame):
-    def __init__(self, master=None):
-        tk.Frame.__init__(self, master)
+class Application(tk.Tk):
+    def __init__(self):
+        tk.Tk.__init__(self)
         self.winfo_toplevel().title("Image Alignment")
         self.grid()
 #        self.pack()
@@ -97,17 +97,12 @@ class Application(tk.Frame):
         self.btn_copyPath_post["text"] = "Copy to Output (Post)"
         self.btn_copyPath_post["command"] = lambda: self.copyDirectoryToEntry(self.entry_postImg, self.entry_outputPath)
         self.btn_copyPath_post.grid(row=2,column=3,padx=padx,pady=pady)
-        
-        frame = tk.Frame(self)
-        frame.grid(row=4, column=1)
-        btn = tk.Button(frame, text='123')
-        btn.pack()
-        
-#        self.imgShowFrame_pre = ImgShowFrame(self.master, imgTitle='Pre Image')
-#        self.imgShowFrame_pre.grid(row=4,column=0)
+
+        self.imgShowFrame_pre = ImgShowFrame(self, imgTitle='Pre Image')
+        self.imgShowFrame_pre.grid(row=4,column=1)
 #        
-#        self.imgShowFrame_post = ImgShowFrame(self,imgTitle='Post Image')
-#        self.imgShowFrame_post.grid(row=4,column=1)
+        self.imgShowFrame_post = ImgShowFrame(self,imgTitle='Post Image')
+        self.imgShowFrame_post.grid(row=4,column=2)
                                 
     def loadFileNameToEntry(self, entry):
         fileName = filedialog.askopenfilename()
@@ -151,8 +146,7 @@ class Application(tk.Frame):
 
         
 if __name__ == '__main__':
-  root = tk.Tk()
-  app = Application(root)
+  app = Application()
   app.mainloop()
   
   
