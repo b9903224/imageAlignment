@@ -9,6 +9,7 @@ image alignment
 
 ## reference:
 tkinter structure  
+https://stackoverflow.com/questions/17466561/best-way-to-structure-a-tkinter-application  
 https://stackoverflow.com/questions/7300072/inheriting-from-frame-or-not-in-a-tkinter-application  
 http://kaiching.org/pydoing/py-guide/unit-23-the-window-component-and-the-view.html  
 https://openhome.cc/Gossip/CodeData/PythonTutorial/LibraryFrameworkPy3.html
@@ -20,8 +21,7 @@ https://blog.csdn.net/wangyiyan315/article/details/16821381
 小白学tkinter(entry的验证函数)  
 https://blog.csdn.net/nkd50000/article/details/76922212  
 tkinter學習-文本框  
-https://www.itread01.com/content/1501995732.html
-
+https://www.itread01.com/content/1501995732.html  
 http://yhhuang1966.blogspot.com/2016/05/python-gui-tkinter.html  
 按鈕open file範例  
 http://yhhuang1966.blogspot.com/2018/10/python-gui-tkinter.html  
