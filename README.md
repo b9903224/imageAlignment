@@ -37,3 +37,5 @@ config作用
 http://yhhuang1966.blogspot.com/2016/05/python-gui-tkinter.html
 建立物件後修改屬性
         
+main windows 鑲嵌frame by class  
+https://stackoverflow.com/questions/35051463/using-a-frame-class-in-a-tk-class-in-python-tkinter
