@@ -42,3 +42,8 @@ https://stackoverflow.com/questions/35051463/using-a-frame-class-in-a-tk-class-i
 
 label 上 image resize  
 https://stackoverflow.com/questions/17351524/tkinter-pil-resize-an-image-to-fit-a-label
+
+	
+Basics For Displaying Image In Tkinter Python:  
+e.g.: "PhotoImage" only for GIF and PGM/PPM formats.
+https://www.c-sharpcorner.com/blogs/basics-for-displaying-image-in-tkinter-python
