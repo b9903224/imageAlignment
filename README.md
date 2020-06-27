@@ -9,8 +9,8 @@ image alignment
 
 ## reference:
 tkinter structure  
-https://stackoverflow.com/questions/7300072/inheriting-from-frame-or-not-in-a-tkinter-application
-http://kaiching.org/pydoing/py-guide/unit-23-the-window-component-and-the-view.html
+https://stackoverflow.com/questions/7300072/inheriting-from-frame-or-not-in-a-tkinter-application  
+http://kaiching.org/pydoing/py-guide/unit-23-the-window-component-and-the-view.html  
 https://openhome.cc/Gossip/CodeData/PythonTutorial/LibraryFrameworkPy3.html
 
 Python Tkinter Grid布局管理器详解 (稱grid為最靈活布局方式)  
