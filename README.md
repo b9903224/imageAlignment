@@ -39,3 +39,6 @@ http://yhhuang1966.blogspot.com/2016/05/python-gui-tkinter.html
         
 main windows 鑲嵌frame by class  
 https://stackoverflow.com/questions/35051463/using-a-frame-class-in-a-tk-class-in-python-tkinter
+
+label 上 image resize  
+https://stackoverflow.com/questions/17351524/tkinter-pil-resize-an-image-to-fit-a-label
