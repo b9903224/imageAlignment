@@ -32,3 +32,8 @@ https://stackoverflow.com/questions/50174404/python-insert-image-into-tkinter-er
 
 如何在 Tkinter 中切換框架  
 https://www.delftstack.com/zh-tw/howto/python-tkinter/how-to-switch-frames-in-tkinter/
+
+config作用  
+http://yhhuang1966.blogspot.com/2016/05/python-gui-tkinter.html
+建立物件後修改屬性
+        
