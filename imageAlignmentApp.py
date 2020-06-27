@@ -6,6 +6,7 @@ Created on Tue Jun 23 23:29:18 2020
 """
 
 import tkinter as tk
+from tkinter import filedialog
 
 padx = 5
 pady = 5
@@ -17,6 +18,7 @@ class Application(tk.Frame):
         self.winfo_toplevel().title("Image Alignment")
         self.grid()
         self.createWidgets()
+        
     def createWidgets(self):
         self.label_preImg = tk.Label(self)
         self.label_preImg["text"] = "Pre Img:"
@@ -34,12 +36,18 @@ class Application(tk.Frame):
         
         self.btn_preImg = tk.Button(self)
         self.btn_preImg["text"] = "Open File"
+        self.btn_preImg["command"] = lambda: self.loadFileNameToEntry(self.entry_preImg)
         self.btn_preImg.grid(row=0,column=2,padx=padx,pady=pady)
         
         self.btn_postImg = tk.Button(self)
         self.btn_postImg["text"] = "Open File"
+        self.btn_postImg["command"] = lambda: self.loadFileNameToEntry(self.entry_postImg)
         self.btn_postImg.grid(row=1,column=2,padx=padx,pady=pady)
         
+    def loadFileNameToEntry(self, entry):
+        fileName = filedialog.askopenfilename()
+        entry.delete(0, tk.END)
+        entry.insert(0, fileName)
 if __name__ == '__main__':
   root = tk.Tk()
   app = Application(root)
