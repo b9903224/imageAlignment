@@ -25,3 +25,6 @@ https://www.itread01.com/content/1501995732.html
 http://yhhuang1966.blogspot.com/2016/05/python-gui-tkinter.html
 按鈕open file範例
 http://yhhuang1966.blogspot.com/2018/10/python-gui-tkinter.html  
+
+插入圖片on label fail可能
+https://stackoverflow.com/questions/50174404/python-insert-image-into-tkinter-error
