@@ -45,5 +45,5 @@ https://stackoverflow.com/questions/17351524/tkinter-pil-resize-an-image-to-fit-
 
 	
 Basics For Displaying Image In Tkinter Python:  
-e.g.: "PhotoImage" only for GIF and PGM/PPM formats.
+e.g.: "PhotoImage" only for GIF and PGM/PPM formats.  
 https://www.c-sharpcorner.com/blogs/basics-for-displaying-image-in-tkinter-python
