@@ -7,6 +7,7 @@ Created on Tue Jun 23 23:29:18 2020
 
 import tkinter as tk
 from tkinter import filedialog
+import tkinter.font as font
 import os
 import numpy as np
 from PIL import Image, ImageTk
@@ -32,6 +33,10 @@ class Application(tk.Frame):
         self.insertVersion()
         
     def createWidgets(self):
+        
+        # bind method must has evvent as input: func(self,event)...
+        self.callback_canvas_openPreImg = lambda event: self.loadImgFromEntry(self.entry_preImg, self.imgShowFrame.canvas_preImg, self.imgShowFrame.label_preImg)
+        self.callback_canvas_openPostImg = lambda event: self.loadImgFromEntry(self.entry_postImg, self.imgShowFrame.canvas_postImg, self.imgShowFrame.label_postImg)
         
         self.label_intro = tk.Label(self)
         self.label_intro["text"] = """output file name e.g.:
@@ -60,38 +65,37 @@ class Application(tk.Frame):
         self.entry_outputPath = tk.Entry(self,width=pathEntryWidth)
         self.entry_outputPath.grid(row=3,column=1,padx=padx,pady=pady)
         
-        self.btn_preImg = tk.Button(self)
-        self.btn_preImg["text"] = "Open Pre Img"
-#        self.btn_preImg["command"] = lambda: self.loadFileNameToEntry(self.entry_preImg)
-        self.btn_preImg["command"] = lambda: self.loadImgFromEntry(self.entry_preImg, self.imgShowFrame.canvas_preImg, self.imgShowFrame.label_preImg)
-        self.btn_preImg.grid(row=1,column=2,padx=padx,pady=pady)
-        
-        self.btn_postImg = tk.Button(self)
-        self.btn_postImg["text"] = "Open Post Img"
-#        self.btn_postImg["command"] = lambda: self.loadFileNameToEntry(self.entry_postImg)
-        self.btn_postImg["command"] = lambda: self.loadImgFromEntry(self.entry_postImg, self.imgShowFrame.canvas_postImg, self.imgShowFrame.label_postImg)
-        self.btn_postImg.grid(row=2,column=2,padx=padx,pady=pady)
-        
         self.btn_outputPath = tk.Button(self)
-        self.btn_outputPath["text"] = "Open Output Folder"
+        self.btn_outputPath["text"] = "Select Output Folder"
         self.btn_outputPath["command"] = lambda: self.loadDirectoryToEntry(self.entry_outputPath)
         self.btn_outputPath.grid(row=3,column=2,padx=padx,pady=pady)
         
         self.btn_copyPath_pre = tk.Button(self)
-        self.btn_copyPath_pre["text"] = "Copy to Output (Pre)"
+        self.btn_copyPath_pre["text"] = "Copy Path to Output (Pre)"
         self.btn_copyPath_pre["command"] = lambda: self.copyDirectoryToEntry(self.entry_preImg, self.entry_outputPath)
-        self.btn_copyPath_pre.grid(row=1,column=3,padx=padx,pady=pady)
+        self.btn_copyPath_pre.grid(row=1,column=2,padx=padx,pady=pady)
         
         self.btn_copyPath_post = tk.Button(self)
-        self.btn_copyPath_post["text"] = "Copy to Output (Post)"
+        self.btn_copyPath_post["text"] = "Copy Path to Output (Post)"
         self.btn_copyPath_post["command"] = lambda: self.copyDirectoryToEntry(self.entry_postImg, self.entry_outputPath)
-        self.btn_copyPath_post.grid(row=2,column=3,padx=padx,pady=pady)
+        self.btn_copyPath_post.grid(row=2,column=2,padx=padx,pady=pady)
         
         self.createImgShowFrame()
         self.imgShowFrame.grid(row=4,column=0,columnspan=3,padx=padx,pady=pady)
-             
+        
+        self.btn_run = tk.Button(self,fg='white',bg='blue',activebackground='red',activeforeground='white',borderwidth=10)
+        self.btn_run['text'] = 'Run'
+        self.btn_run['font'] = font.Font(size=40, weight='bold')
+        self.btn_run['command'] = self.run()
+        self.btn_run.grid(row = 4,column=3,rowspan=1,padx=5,pady=5,sticky='EW')
+        
+        
+    def run(self):
+        pass
+    
     def createImgShowFrame(self):
-        imgShowFrame = tk.Frame(self)
+#        imgShowFrame = tk.Frame(self)
+        imgShowFrame = tk.LabelFrame(self,text='Image',padx=5,pady=5,labelanchor='nw')
         
         textLoc = imgShowSize/2
         
@@ -101,11 +105,13 @@ class Application(tk.Frame):
         imgShowFrame.label_postImg = tk.Label(imgShowFrame)
         imgShowFrame.label_postImg['text'] = 'Post Img'
         
-        imgShowFrame.canvas_preImg = tk.Canvas(imgShowFrame,width=imgShowSize,height=imgShowSize,bg='green')
-        imgShowFrame.canvas_preImg.create_text(textLoc,textLoc,text='No Image',fill="darkblue",font="Times 20 italic bold")
+        imgShowFrame.canvas_preImg = tk.Canvas(imgShowFrame,width=imgShowSize,height=imgShowSize,bg='skyblue')
+        imgShowFrame.canvas_preImg.create_text(textLoc,textLoc,text='Select Pre Image (Click Me)',fill="darkblue",font="Times 20 italic bold")
+        imgShowFrame.canvas_preImg.bind('<Button-1>',self.callback_canvas_openPreImg)
         
         imgShowFrame.canvas_postImg = tk.Canvas(imgShowFrame,width=imgShowSize,height=imgShowSize,bg='green')
-        imgShowFrame.canvas_postImg.create_text(textLoc,textLoc,text='No Image',fill="darkblue",font="Times 20 italic bold")
+        imgShowFrame.canvas_postImg.create_text(textLoc,textLoc,text='Select Post Image (Click Me)',fill="darkblue",font="Times 20 italic bold")
+        imgShowFrame.canvas_postImg.bind('<Button-1>',self.callback_canvas_openPostImg)
         
         imgShowFrame.label_preImg.grid(row=0,column=0)
         imgShowFrame.label_postImg.grid(row=0,column=1)
@@ -118,7 +124,7 @@ class Application(tk.Frame):
         fileName = self.loadFileNameToEntry(entry)
         self.loadImgToCanvas(fileName,canvas,label)
         
-    def loadImgToCanvas(self,fileName,canvas,label):
+    def loadImgToCanvas(self,fileName,canvas,label, event=None):
         if not fileName:
             return
         img_ori = Image.open(fileName)
