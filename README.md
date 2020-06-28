@@ -84,3 +84,9 @@ https://stackoverflow.com/questions/7299955/tkinter-binding-a-function-with-argu
 
 抓GUI grid大小 (columns, rows) = widget.grid_size()  
 https://www.geeksforgeeks.org/python-tkinter-grid_location-and-grid_size-method/
+
+Pillow 沒有原生按image比例resize  
+https://stackoverflow.com/questions/2232742/does-python-pil-resize-maintain-the-aspect-ratio
+
+simple pop up windows:  
+https://stackoverflow.com/questions/58237056/make-image-bigger-in-a-pop-up-window-in-python-tkinter
