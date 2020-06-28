@@ -90,3 +90,9 @@ https://stackoverflow.com/questions/2232742/does-python-pil-resize-maintain-the-
 
 simple pop up windows:  
 https://stackoverflow.com/questions/58237056/make-image-bigger-in-a-pop-up-window-in-python-tkinter
+
+Canvas濾除邊邊, should be highlightthickness instead of borderwidth  
+https://stackoverflow.com/questions/4310489/how-do-i-remove-the-light-grey-border-around-my-canvas-widget
+
+
+https://stackoverflow.com/questions/4310489/how-do-i-remove-the-light-grey-border-around-my-canvas-widget
