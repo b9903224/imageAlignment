@@ -74,3 +74,13 @@ focus_set() 和 focuse_get() 差別
 focus_set(): 將特定物件改為focus  
 focuse_get(): 抓到目前被focus的物件  
 https://www.geeksforgeeks.org/python-focus_set-and-focus_get-method/
+
+bind event to 物件  
+https://stackoverflow.com/questions/29211794/how-to-bind-a-click-event-to-a-canvas-in-tkinter  
+http://effbot.org/tkinterbook/tkinter-events-and-bindings.htm  
+上面的中文翻譯: https://blog.51cto.com/1344839/1901654  
+同一個function同時指派給command 和 bind  
+https://stackoverflow.com/questions/7299955/tkinter-binding-a-function-with-arguments-to-a-widget
+
+
+
