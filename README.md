@@ -56,3 +56,6 @@ https://stackoverflow.com/questions/37368517/how-to-add-border-to-a-button-in-py
 
 顏色表:  
 http://www.science.smith.edu/dftwiki/index.php/Color_Charts_for_TKinter
+
+按鈕點擊前後顏色設定  
+https://jennaweng0621.pixnet.net/blog/post/403551398-%5Bpython%5D-tkinter-%E6%8C%89%E9%88%95%28button%29
