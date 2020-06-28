@@ -48,7 +48,7 @@ Basics For Displaying Image In Tkinter Python:
 e.g.: "PhotoImage" only for GIF and PGM/PPM formats.  
 https://www.c-sharpcorner.com/blogs/basics-for-displaying-image-in-tkinter-python
 
-Decorator Recipe: Event Binding in Tkinter  
+Decorator Recipe: Event Binding in Tkinter (ListboxSelect)  
 http://farmdev.com/src/secrets/decorator/tkinter/step3.html#
 
 按鈕邊界加大 (增加立體感)  
