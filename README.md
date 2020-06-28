@@ -63,3 +63,6 @@ https://jennaweng0621.pixnet.net/blog/post/403551398-%5Bpython%5D-tkinter-%E6%8C
 如何更改 Tkinter 標籤字型大小  
 https://www.delftstack.com/zh-tw/howto/python-tkinter/how-to-change-the-tkinter-label-font-size/  
 https://pythonexamples.org/python-tkinter-button-change-font/
+
+LabelFrame中文說明  
+https://www.itread01.com/content/1545320706.html
