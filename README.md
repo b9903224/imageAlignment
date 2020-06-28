@@ -69,3 +69,6 @@ https://www.itread01.com/content/1545320706.html
 
 Pillow image mode中文說明  
 https://zhuanlan.zhihu.com/p/27504020
+
+focus_set() 和 focuse_get() 差別  
+https://www.geeksforgeeks.org/python-focus_set-and-focus_get-method/
