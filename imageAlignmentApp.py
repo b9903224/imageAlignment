@@ -20,20 +20,7 @@ padx = 0
 pady = 0
 pathEntryWidth=90
 currentPath = os.getcwd()
-
-class ImgShowFrame(tk.Frame):
-    def __init__(self, master=None, imgTitle=''):
-        tk.Frame.__init__(self)
-#        self.pack()
-        self.createWidgets(imgTitle)
-    def createWidgets(self, imgTitle):
-        self.label_img = tk.Label(self)
-        self.label_img['text'] = imgTitle
-        self.label_img.pack()
-        
-        self.canvas_img = tk.Canvas(self,width=256,height=256,bg='green')
-        self.canvas_img.create_text(120,120,text='No Image',fill="darkblue",font="Times 20 italic bold")
-        self.canvas_img.pack()
+imgShowSize=512
         
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -75,12 +62,14 @@ class Application(tk.Frame):
         
         self.btn_preImg = tk.Button(self)
         self.btn_preImg["text"] = "Open Pre Img"
-        self.btn_preImg["command"] = lambda: self.loadFileNameToEntry(self.entry_preImg)
+#        self.btn_preImg["command"] = lambda: self.loadFileNameToEntry(self.entry_preImg)
+        self.btn_preImg["command"] = lambda: self.loadImgFromEntry(self.entry_preImg, self.imgShowFrame.canvas_preImg, self.imgShowFrame.label_preImg)
         self.btn_preImg.grid(row=1,column=2,padx=padx,pady=pady)
         
         self.btn_postImg = tk.Button(self)
         self.btn_postImg["text"] = "Open Post Img"
-        self.btn_postImg["command"] = lambda: self.loadFileNameToEntry(self.entry_postImg)
+#        self.btn_postImg["command"] = lambda: self.loadFileNameToEntry(self.entry_postImg)
+        self.btn_postImg["command"] = lambda: self.loadImgFromEntry(self.entry_postImg, self.imgShowFrame.canvas_postImg, self.imgShowFrame.label_postImg)
         self.btn_postImg.grid(row=2,column=2,padx=padx,pady=pady)
         
         self.btn_outputPath = tk.Button(self)
@@ -98,23 +87,57 @@ class Application(tk.Frame):
         self.btn_copyPath_post["command"] = lambda: self.copyDirectoryToEntry(self.entry_postImg, self.entry_outputPath)
         self.btn_copyPath_post.grid(row=2,column=3,padx=padx,pady=pady)
         
-        frame = tk.Frame(self)
-        frame.grid(row=4, column=1)
-        btn = tk.Button(frame, text='123')
-        btn.pack()
+        self.createImgShowFrame()
+        self.imgShowFrame.grid(row=4,column=0,columnspan=3,padx=padx,pady=pady)
+             
+    def createImgShowFrame(self):
+        imgShowFrame = tk.Frame(self)
         
-#        self.imgShowFrame_pre = ImgShowFrame(self.master, imgTitle='Pre Image')
-#        self.imgShowFrame_pre.grid(row=4,column=0)
-#        
-#        self.imgShowFrame_post = ImgShowFrame(self,imgTitle='Post Image')
-#        self.imgShowFrame_post.grid(row=4,column=1)
-                                
+        textLoc = imgShowSize/2
+        
+        imgShowFrame.label_preImg = tk.Label(imgShowFrame)
+        imgShowFrame.label_preImg['text'] = 'Pre Img'
+        
+        imgShowFrame.label_postImg = tk.Label(imgShowFrame)
+        imgShowFrame.label_postImg['text'] = 'Post Img'
+        
+        imgShowFrame.canvas_preImg = tk.Canvas(imgShowFrame,width=imgShowSize,height=imgShowSize,bg='green')
+        imgShowFrame.canvas_preImg.create_text(textLoc,textLoc,text='No Image',fill="darkblue",font="Times 20 italic bold")
+        
+        imgShowFrame.canvas_postImg = tk.Canvas(imgShowFrame,width=imgShowSize,height=imgShowSize,bg='green')
+        imgShowFrame.canvas_postImg.create_text(textLoc,textLoc,text='No Image',fill="darkblue",font="Times 20 italic bold")
+        
+        imgShowFrame.label_preImg.grid(row=0,column=0)
+        imgShowFrame.label_postImg.grid(row=0,column=1)
+        imgShowFrame.canvas_preImg.grid(row=1,column=0)
+        imgShowFrame.canvas_postImg.grid(row=1,column=1)
+        
+        self.imgShowFrame = imgShowFrame
+        
+    def loadImgFromEntry(self,entry,canvas,label):
+        fileName = self.loadFileNameToEntry(entry)
+        self.loadImgToCanvas(fileName,canvas,label)
+        
+    def loadImgToCanvas(self,fileName,canvas,label):
+        if not fileName:
+            return
+        img_ori = Image.open(fileName)
+        img = ImageTk.PhotoImage(img_ori.resize((imgShowSize,imgShowSize)))
+        canvas.create_image(0,0,anchor='nw',image=img)
+        canvas.image=img
+        canvas.img_ori = img_ori
+        _, imgFileName = os.path.split(fileName)
+        labelText = label['text']
+        label_title = '[%s] %s, size: %g, %g, mode: %s'%(labelText,imgFileName, img_ori.height,img_ori.width,img_ori.mode)
+        label.config(text=label_title)
+        
     def loadFileNameToEntry(self, entry):
         fileName = filedialog.askopenfilename()
 #        print(fileName)
         if fileName:
             entry.delete(0, tk.END)
             entry.insert(0, fileName)
+            return fileName        
             
     def loadDirectoryToEntry(self, entry):
         directory = filedialog.askdirectory()
