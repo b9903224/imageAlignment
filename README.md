@@ -94,5 +94,5 @@ https://stackoverflow.com/questions/58237056/make-image-bigger-in-a-pop-up-windo
 Canvas濾除邊邊, should be highlightthickness instead of borderwidth  
 https://stackoverflow.com/questions/4310489/how-do-i-remove-the-light-grey-border-around-my-canvas-widget
 
-
-https://stackoverflow.com/questions/4310489/how-do-i-remove-the-light-grey-border-around-my-canvas-widget
+Show Large Image using Scrollbar in Python: 提供可以popup scroll image 的class和用法:  
+https://stackoverflow.com/questions/56043767/show-large-image-using-scrollbar-in-python/56043976
