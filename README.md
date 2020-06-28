@@ -47,3 +47,6 @@ https://stackoverflow.com/questions/17351524/tkinter-pil-resize-an-image-to-fit-
 Basics For Displaying Image In Tkinter Python:  
 e.g.: "PhotoImage" only for GIF and PGM/PPM formats.  
 https://www.c-sharpcorner.com/blogs/basics-for-displaying-image-in-tkinter-python
+
+Decorator Recipe: Event Binding in Tkinter  
+http://farmdev.com/src/secrets/decorator/tkinter/step3.html#
