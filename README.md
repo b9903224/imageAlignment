@@ -50,3 +50,6 @@ https://www.c-sharpcorner.com/blogs/basics-for-displaying-image-in-tkinter-pytho
 
 Decorator Recipe: Event Binding in Tkinter  
 http://farmdev.com/src/secrets/decorator/tkinter/step3.html#
+
+按鈕邊界加大 (增加立體感)  
+https://stackoverflow.com/questions/37368517/how-to-add-border-to-a-button-in-python-for-tkinter
