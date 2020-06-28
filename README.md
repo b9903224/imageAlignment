@@ -71,4 +71,6 @@ Pillow image mode中文說明
 https://zhuanlan.zhihu.com/p/27504020
 
 focus_set() 和 focuse_get() 差別  
+focus_set(): 將特定物件改為focus  
+focuse_get(): 抓到目前被focus的物件  
 https://www.geeksforgeeks.org/python-focus_set-and-focus_get-method/
