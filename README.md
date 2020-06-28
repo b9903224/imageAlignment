@@ -82,5 +82,5 @@ http://effbot.org/tkinterbook/tkinter-events-and-bindings.htm
 同一個function同時指派給command 和 bind  
 https://stackoverflow.com/questions/7299955/tkinter-binding-a-function-with-arguments-to-a-widget
 
-
-
+抓GUI grid大小 (columns, rows) = widget.grid_size()  
+https://www.geeksforgeeks.org/python-tkinter-grid_location-and-grid_size-method/
