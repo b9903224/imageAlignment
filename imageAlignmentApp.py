@@ -12,7 +12,9 @@ import os
 import numpy as np
 from PIL import Image, ImageTk
 from utility.insertSignature import insertSignature
+from scrollimage import ScrollableImage
 import utility
+
 
 featVer = 'dev'
 kernelVer = 'dev'
@@ -30,11 +32,12 @@ class Application(tk.Frame):
         self.grid()
 #        self.pack()
         self.createWidgets()
-        self.insertVersion()
+        self.insertVersion('RD',1,1)
+#        self.insertVersion('RU',1,1)
         
     def createWidgets(self):
         
-        # bind method must has evvent as input: func(self,event)...
+        # bind method must has event as input: func(self,event)...
         self.callback_canvas_openPreImg = lambda event: self.loadImgFromEntry(self.entry_preImg, self.imgShowFrame.canvas_preImg, self.imgShowFrame.label_preImg)
         self.callback_canvas_openPostImg = lambda event: self.loadImgFromEntry(self.entry_postImg, self.imgShowFrame.canvas_postImg, self.imgShowFrame.label_postImg)
         
@@ -105,11 +108,11 @@ class Application(tk.Frame):
         imgShowFrame.label_postImg = tk.Label(imgShowFrame)
         imgShowFrame.label_postImg['text'] = 'Post Img'
         
-        imgShowFrame.canvas_preImg = tk.Canvas(imgShowFrame,width=imgShowSize,height=imgShowSize,bg='skyblue')
+        imgShowFrame.canvas_preImg = tk.Canvas(imgShowFrame,width=imgShowSize,height=imgShowSize,bg='skyblue',highlightthickness=0)
         imgShowFrame.canvas_preImg.create_text(textLoc,textLoc,text='Select Pre Image (Click Me)',fill="darkblue",font="Times 20 italic bold")
         imgShowFrame.canvas_preImg.bind('<Button-1>',self.callback_canvas_openPreImg)
         
-        imgShowFrame.canvas_postImg = tk.Canvas(imgShowFrame,width=imgShowSize,height=imgShowSize,bg='green')
+        imgShowFrame.canvas_postImg = tk.Canvas(imgShowFrame,width=imgShowSize,height=imgShowSize,bg='green',highlightthickness=0)
         imgShowFrame.canvas_postImg.create_text(textLoc,textLoc,text='Select Post Image (Click Me)',fill="darkblue",font="Times 20 italic bold")
         imgShowFrame.canvas_postImg.bind('<Button-1>',self.callback_canvas_openPostImg)
         
@@ -120,11 +123,13 @@ class Application(tk.Frame):
         
         self.imgShowFrame = imgShowFrame
         
-    def loadImgFromEntry(self,entry,canvas,label):
+    def loadImgFromEntry(self,entry,canvas,label, event=None):
+#        print(event)
         fileName = self.loadFileNameToEntry(entry)
         self.loadImgToCanvas(fileName,canvas,label)
         
-    def loadImgToCanvas(self,fileName,canvas,label, event=None):
+    def loadImgToCanvas(self,fileName,canvas,label):
+        
         if not fileName:
             return
         img_ori = Image.open(fileName)
@@ -158,7 +163,7 @@ class Application(tk.Frame):
         destEtry.delete(0, tk.END)
         destEtry.insert(0, path)
         
-    def insertVersion(self):
+    def insertVersion(self,loc='RD',skipRow=0,skipCol=0):
 #        signatureImg = Image.open('duck.jpg')
         rgb = self.winfo_rgb(self.cget('bg'))
         rgb = [_/255 for _ in rgb]
@@ -167,15 +172,42 @@ class Application(tk.Frame):
         img[..., 0] = rgb[0]*255
         img[..., 1] = rgb[1]*255
         img[..., 2] = rgb[2]*255
-        img = insertSignature(img,featVer=featVer,kernelVer=kernelVer,fontSize=fontSize,loc='RU')
+        img = insertSignature(img,featVer=featVer,kernelVer=kernelVer,fontSize=fontSize,loc=loc)
 #        img = insertSignature(img,featVer=featVer,kernelVer=kernelVer,fontSize=fontSize,loc='RD')
 #        utility.imshow(img, 'img')
-        signatureImg = Image.fromarray(img)
-        signatureImg = ImageTk.PhotoImage(signatureImg)
+        signatureImg_pillow = Image.fromarray(img)
+        signatureImg = ImageTk.PhotoImage(signatureImg_pillow)
 #        signatureImg = ImageTk.PhotoImage(Image.open('duck.jpg'))
         self.label_signature = tk.Label(self, image=signatureImg)
         self.label_signature.image = signatureImg
-        self.label_signature.grid(row=0,column=3)
+        self.label_signature.image_pillow = signatureImg_pillow
+#        self.label_signature.bind('<Button-1>',lambda event: self.popupImageByLabel(self.label_signature.image_pillow,ratio=4))
+        self.label_signature.bind('<Button-1>',lambda event: self.popupScrollImage(self.label_signature.image))
+        columnNum, rowNum = self.grid_size()
+        if loc == 'RD':
+            self.label_signature.grid(row=rowNum-1+skipCol,column=columnNum-1+skipRow,sticky='SE')
+        elif loc == 'RU':
+            self.label_signature.grid(row=0,column=columnNum-1+skipRow,sticky='NE')
+            
+    def popupScrollImage(self,img):
+        popupWin = tk.Toplevel()
+        image_window = ScrollableImage(popupWin, image=img, scrollbarwidth=6, width=200, height=200)
+        image_window.pack()
+        pass
+    
+    def popupImageByLabel(self,image_pillow,event=None,ratio=1):
+        win = tk.Toplevel()
+#        win.title('Version')
+#        image_pillow = self.label_signature.image_pillow
+#        ratio = 4
+        width, height = image_pillow.width * ratio, image_pillow.height*ratio
+        image_pillow = image_pillow.resize((width, height))
+        img = ImageTk.PhotoImage(image_pillow)
+        win.label = tk.Label(win,image=img)
+        win.label.image = img
+        win.label.bind('<Button-1>',lambda event: self.popupImageByLabel(image_pillow,ratio=2))
+        win.label.back()
+
 
 
         
