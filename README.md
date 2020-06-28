@@ -66,3 +66,6 @@ https://pythonexamples.org/python-tkinter-button-change-font/
 
 LabelFrame中文說明  
 https://www.itread01.com/content/1545320706.html
+
+Pillow image mode中文說明  
+https://zhuanlan.zhihu.com/p/27504020
