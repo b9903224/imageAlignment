@@ -59,3 +59,6 @@ http://www.science.smith.edu/dftwiki/index.php/Color_Charts_for_TKinter
 
 按鈕點擊前後顏色設定  
 https://jennaweng0621.pixnet.net/blog/post/403551398-%5Bpython%5D-tkinter-%E6%8C%89%E9%88%95%28button%29
+
+如何更改 Tkinter 標籤字型大小  
+https://www.delftstack.com/zh-tw/howto/python-tkinter/how-to-change-the-tkinter-label-font-size/
