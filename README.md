@@ -96,3 +96,6 @@ https://stackoverflow.com/questions/4310489/how-do-i-remove-the-light-grey-borde
 
 Show Large Image using Scrollbar in Python: 提供可以popup scroll image 的class和用法:  
 https://stackoverflow.com/questions/56043767/show-large-image-using-scrollbar-in-python/56043976
+
+GUI的最終選擇 Tkinter(三)：Checkbutton元件和Radiobutton元件、LabelFrame元件  
+https://www.itread01.com/content/1542028101.html
