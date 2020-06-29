@@ -6,18 +6,22 @@ rewrite from https://stackoverflow.com/questions/56043767/show-large-image-using
 """
 
 import tkinter
+from PIL import ImageTk
 
 class ScrollableImageWithRatio(tkinter.Frame): # todo
-    def __init__(self, master=None, **kw):
-        self.image = kw.pop('image', None)
-        sw = kw.pop('scrollbarwidth', 10)
-        super(ScrollableImage, self).__init__(master=master, **kw)
-        self.cnvs = tkinter.Canvas(self, highlightthickness=0, **kw)
-        self.cnvs.create_image(0, 0, anchor='nw', image=self.image)
+    def __init__(self, master,image,scrollbarwidth,width,height,ratio):
+        imgW, imgH = image.width * ratio, image.height*ratio
+        image = image.resize((imgW, imgH))
+        image = ImageTk.PhotoImage(image)
+        super(ScrollableImageWithRatio, self).__init__(master)
+        self.cnvs = tkinter.Canvas(self, highlightthickness=0,width=width,height=height)
+        self.cnvs.create_image(0, 0, anchor='nw', image=image)
         # Vertical and Horizontal scrollbars
+        sw = scrollbarwidth
         self.v_scroll = tkinter.Scrollbar(self, orient='vertical', width=sw)
         self.h_scroll = tkinter.Scrollbar(self, orient='horizontal', width=sw)
         # Grid and configure weight.
+        self.cnvs.image = image
         self.cnvs.grid(row=0, column=0,  sticky='nsew')
         self.h_scroll.grid(row=1, column=0, sticky='ew')
         self.v_scroll.grid(row=0, column=1, sticky='ns')
@@ -31,7 +35,6 @@ class ScrollableImageWithRatio(tkinter.Frame): # todo
         self.h_scroll.config(command=self.cnvs.xview)
         # Assign the region to be scrolled 
         self.cnvs.config(scrollregion=self.cnvs.bbox('all'))
-        self.cnvs.bind_class(self.cnvs, "<MouseWheel>", self.mouse_scroll)
 
     def mouse_scroll(self, evt):
         if evt.state == 0 :
@@ -40,6 +43,7 @@ class ScrollableImageWithRatio(tkinter.Frame): # todo
         if evt.state == 1:
             self.cnvs.xview_scroll(-1*(evt.delta), 'units') # For MacOS
             self.cnvs.xview_scroll(int(-1*(evt.delta/120)), 'units') # For windows
+
 
 class ScrollableImage(tkinter.Frame):
     def __init__(self, master=None, **kw):

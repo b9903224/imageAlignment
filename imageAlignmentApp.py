@@ -12,7 +12,7 @@ import os
 import numpy as np
 from PIL import Image, ImageTk
 from utility.insertSignature import insertSignature
-from scrollimage import ScrollableImage
+import scrollimage
 import utility
 
 
@@ -182,18 +182,23 @@ class Application(tk.Frame):
         self.label_signature.image = signatureImg
         self.label_signature.image_pillow = signatureImg_pillow
 #        self.label_signature.bind('<Button-1>',lambda event: self.popupImageByLabel(self.label_signature.image_pillow,ratio=4))
-        self.label_signature.bind('<Button-1>',lambda event: self.popupScrollImage(self.label_signature.image))
+#        self.label_signature.bind('<Button-1>',lambda event: self.popupScrollImage(self.label_signature.image))
+        self.label_signature.bind('<Button-1>',lambda event: self.popupScrollImageWithRatio(self.label_signature.image_pillow,ratio=10))
         columnNum, rowNum = self.grid_size()
         if loc == 'RD':
             self.label_signature.grid(row=rowNum-1+skipCol,column=columnNum-1+skipRow,sticky='SE')
         elif loc == 'RU':
             self.label_signature.grid(row=0,column=columnNum-1+skipRow,sticky='NE')
             
+    def popupScrollImageWithRatio(self,img,ratio):
+        popupWin = tk.Toplevel()
+        image_window = scrollimage.ScrollableImageWithRatio(popupWin, image=img, scrollbarwidth=20, width=512*3, height=512, ratio=ratio)
+        image_window.pack()
+    
     def popupScrollImage(self,img):
         popupWin = tk.Toplevel()
-        image_window = ScrollableImage(popupWin, image=img, scrollbarwidth=6, width=200, height=200)
+        image_window = scrollimage.ScrollableImage(popupWin, image=img, scrollbarwidth=6, width=200, height=200)
         image_window.pack()
-        pass
     
     def popupImageByLabel(self,image_pillow,event=None,ratio=1):
         win = tk.Toplevel()
