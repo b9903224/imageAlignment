@@ -92,6 +92,25 @@ class Application(tk.Frame):
         self.btn_run['command'] = self.run()
         self.btn_run.grid(row = 4,column=3,rowspan=1,padx=5,pady=5,sticky='EW')
         
+        self.createAlignModeFrame()
+        self.alignModeFrame.grid(row=5,column=0,padx=5,pady=5)
+        
+    def createAlignModeFrame(self):
+        alignModeFrame = tk.LabelFrame(self,text='Align Mode',padx=5,pady=5,labelanchor='nw')
+        
+        alignMode = tk.StringVar()
+        alignMode.set('auto')
+        
+        hitme = lambda : print('%s mode selected'%alignMode.get())
+        
+        alignModeFrame.radioBtn_auto = tk.Radiobutton(alignModeFrame,text='Auto',variable=alignMode,value='auto',command=hitme)
+        alignModeFrame.radioBtn_manual = tk.Radiobutton(alignModeFrame,text='Manual',variable=alignMode,value='manual',command=hitme)
+        
+        alignModeFrame.radioBtn_auto.grid(row=0,column=0,sticky=tk.W)
+        alignModeFrame.radioBtn_manual.grid(row=1,column=0,sticky=tk.W)
+
+        alignModeFrame.alignMode = alignMode
+        self.alignModeFrame = alignModeFrame
         
     def run(self):
         pass
