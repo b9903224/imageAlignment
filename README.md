@@ -99,3 +99,9 @@ https://stackoverflow.com/questions/56043767/show-large-image-using-scrollbar-in
 
 GUI的最終選擇 Tkinter(三)：Checkbutton元件和Radiobutton元件、LabelFrame元件  
 https://www.itread01.com/content/1542028101.html
+
+disable 元件 in container  
+https://stackoverflow.com/questions/24942760/is-there-a-way-to-gray-out-disable-a-tkinter-frame  
+https://stackoverflow.com/questions/51902451/how-to-enable-and-disable-frame-instead-of-individual-widgets-in-python-tkinter/52152773  
+
+
