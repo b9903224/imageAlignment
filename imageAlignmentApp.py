@@ -84,16 +84,43 @@ class Application(tk.Frame):
         self.btn_copyPath_post.grid(row=2,column=2,padx=padx,pady=pady)
         
         self.createImgShowFrame()
-        self.imgShowFrame.grid(row=4,column=0,columnspan=3,padx=padx,pady=pady)
+        self.imgShowFrame.grid(row=5,column=0,columnspan=3,padx=padx,pady=pady)
+        
+        self.createAlignModeFrame()
+        self.alignModeFrame.grid(row=4,column=0,padx=5,pady=5,columnspan=2,sticky='W')
+        
+        self.createManualAlignFrame()
+        self.manualAlignFrame.grid(row=4,column=1,padx=15,pady=5,sticky='WN')
         
         self.btn_run = tk.Button(self,fg='white',bg='blue',activebackground='red',activeforeground='white',borderwidth=10)
         self.btn_run['text'] = 'Run'
         self.btn_run['font'] = font.Font(size=40, weight='bold')
         self.btn_run['command'] = self.run()
-        self.btn_run.grid(row = 4,column=3,rowspan=1,padx=5,pady=5,sticky='EW')
+        self.btn_run.grid(row = 5,column=3,rowspan=1,padx=5,pady=5,sticky='EW')
         
-        self.createAlignModeFrame()
-        self.alignModeFrame.grid(row=5,column=0,padx=5,pady=5)
+    def createManualAlignFrame(self):
+        entryWidth = 10
+        manualAlignFrame = tk.LabelFrame(self,text='Manual Shift',labelanchor='nw',padx=5,pady=5)
+        
+        manualAlignFrame.label_shift_x = tk.Label(manualAlignFrame,text='X Shift: ')
+        manualAlignFrame.entry_shift_x = tk.Entry(manualAlignFrame,width=entryWidth)
+        manualAlignFrame.label_shift_y = tk.Label(manualAlignFrame,text='Y Shift: ')
+        manualAlignFrame.entry_shift_y = tk.Entry(manualAlignFrame,width=entryWidth)
+        
+        manualAlignFrame.entry_shift_x.insert(0,'0')
+        manualAlignFrame.entry_shift_y.insert(0,'0')
+        
+        manualAlignFrame.label_shift_x['state'] = 'disable'
+        manualAlignFrame.entry_shift_x['state'] = 'disable'
+        manualAlignFrame.label_shift_y['state'] = 'disable'
+        manualAlignFrame.entry_shift_y['state'] = 'disable'
+        
+        manualAlignFrame.label_shift_x.grid(row=0,column=0,sticky='W')
+        manualAlignFrame.entry_shift_x.grid(row=0,column=1)
+        manualAlignFrame.label_shift_y.grid(row=1,column=0,sticky='W')
+        manualAlignFrame.entry_shift_y.grid(row=1,column=1)
+        
+        self.manualAlignFrame = manualAlignFrame
         
     def createAlignModeFrame(self):
         alignModeFrame = tk.LabelFrame(self,text='Align Mode',padx=5,pady=5,labelanchor='nw')
@@ -101,17 +128,37 @@ class Application(tk.Frame):
         alignMode = tk.StringVar()
         alignMode.set('auto')
         
-        hitme = lambda : print('%s mode selected'%alignMode.get())
+#        hitme = lambda : print('%s mode selected'%alignMode.get())
+        disableManualAlignFrame = lambda : self.disableChildren(self.manualAlignFrame)
+        enableManualAlignFrame = lambda : self.enableChildren(self.manualAlignFrame)
         
-        alignModeFrame.radioBtn_auto = tk.Radiobutton(alignModeFrame,text='Auto',variable=alignMode,value='auto',command=hitme)
-        alignModeFrame.radioBtn_manual = tk.Radiobutton(alignModeFrame,text='Manual',variable=alignMode,value='manual',command=hitme)
+        alignModeFrame.radioBtn_auto = tk.Radiobutton(alignModeFrame,text='Auto',variable=alignMode,value='auto',command=disableManualAlignFrame)
+        alignModeFrame.radioBtn_manual = tk.Radiobutton(alignModeFrame,text='Manual',variable=alignMode,value='manual',command=enableManualAlignFrame)
         
         alignModeFrame.radioBtn_auto.grid(row=0,column=0,sticky=tk.W)
         alignModeFrame.radioBtn_manual.grid(row=1,column=0,sticky=tk.W)
 
         alignModeFrame.alignMode = alignMode
+
         self.alignModeFrame = alignModeFrame
         
+    def disableChildren(self,parent):
+        for child in parent.winfo_children():
+            wtype = child.winfo_class()
+            if wtype not in ('Frame','Labelframe'):
+                child.configure(state='disable')
+            else:
+                self.disableChildren(child)
+
+    def enableChildren(self,parent):
+        for child in parent.winfo_children():
+            wtype = child.winfo_class()
+#            print (wtype)
+            if wtype not in ('Frame','Labelframe'):
+                child.configure(state='normal')
+            else:
+                self.enableChildren(child)
+                
     def run(self):
         pass
     
