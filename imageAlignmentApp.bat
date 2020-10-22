@@ -22,7 +22,7 @@ set "FUNC_NAME=imageAlignmentApp"
 set "PATH=%PY_HOME%;%PY_HOME%\Library\mingw-w64\bin;%PY_HOME%\Library\usr\bin;%PY_HOME%\Library\bin;%PY_HOME%\Scripts;%PY_HOME%\bin;%PY_HOME%\condabin;%PATH%"
 
 @echo on
-start pythonw "%FUNC_NAME%.py"
+pythonw "%FUNC_NAME%.py"
 
 REM exit
 REM pause()
